@@ -1,7 +1,4 @@
 // ignore_for_file: avoid_print
-
-
-
 import './../models/news_response.dart';
 import '../helpers/constants.dart';
 import '../service/api_service.dart';

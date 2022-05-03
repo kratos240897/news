@@ -18,13 +18,16 @@ class Detail extends StatelessWidget {
         backgroundColor: Colors.grey[200],
         body: SafeArea(
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 8.0),
+            padding: const EdgeInsets.only(
+                left: 12.0, right: 12.0, bottom: 8.0, top: 8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomAppBar(
-                    onTap: () {
+                    onTapLeft: () {
+                      Navigator.pop(context);
+                    },
+                    onTapRight: () {
                       Navigator.pushNamed(context, AppRouter.WEB_VIEW,
                           arguments: article.url.toString());
                     },
@@ -50,19 +53,22 @@ class NewsBody extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Material(
-              borderRadius: BorderRadius.circular(20.0),
-              elevation: 8.0,
-              child: Container(
-                height: deviceHeight * 0.45,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(article.urlToImage !=
-                              null
-                          ? article.urlToImage.toString()
-                          : 'https://i.pinimg.com/originals/64/a9/1a/64a91a7a4c519e20dab92de9cf1d4447.jpg')),
+            Hero(
+              tag: article.hashCode,
+              child: Material(
+                borderRadius: BorderRadius.circular(20.0),
+                elevation: 8.0,
+                child: Container(
+                  height: deviceHeight * 0.45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider(article.urlToImage !=
+                                null
+                            ? article.urlToImage.toString()
+                            : 'https://i.pinimg.com/originals/64/a9/1a/64a91a7a4c519e20dab92de9cf1d4447.jpg')),
+                  ),
                 ),
               ),
             ),

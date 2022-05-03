@@ -17,6 +17,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
   final AppRepository appRepository = AppRepo(apiService: ApiService());
+  appRepository.init();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
         create: ((context) => HomeProvider(appRepository: appRepository))),

@@ -33,9 +33,13 @@ class _WebViewScreenState extends State<WebViewScreen> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding:
+                    const EdgeInsets.only(left: 12.0, right: 12.0, top: 8.0),
                 child: CustomAppBar(
-                    onTap: () {
+                    onTapLeft: () {
+                      Navigator.pop(context);
+                    },
+                    onTapRight: () {
                       _launchUrl();
                     },
                     icon: FontAwesomeIcons.safari),

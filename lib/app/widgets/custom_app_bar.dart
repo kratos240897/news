@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'bordered_box_button.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback onTapLeft;
+  final VoidCallback onTapRight;
   final IconData icon;
-  const CustomAppBar({Key? key, required this.onTap, required this.icon}) : super(key: key);
+  const CustomAppBar({Key? key, required this.onTapLeft, required this.onTapRight, required this.icon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +13,9 @@ class CustomAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         BorderedBoxButton(
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: onTapLeft,
             icon: CupertinoIcons.back),
-        BorderedBoxButton(onTap: onTap, icon: icon)
+        BorderedBoxButton(onTap: onTapRight, icon: icon)
       ],
     );
   }
