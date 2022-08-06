@@ -1,12 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_news/app/helpers/utils.dart';
 import 'package:showcaseview/showcaseview.dart';
 import '../../models/news_response.dart';
 import '../../routes/router.dart';
 import '../../widgets/bordered_box_button.dart';
+import '../../widgets/news_list.dart';
 import 'home_provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -217,11 +219,11 @@ class TopicsTabBar extends StatelessWidget {
           isScrollable: true,
           indicatorColor: Colors.black,
           controller: _tabController,
-          labelColor: Colors.black,
+          labelColor: Styles.primaryColor,
           indicator: const UnderlineTabIndicator(
-              borderSide: BorderSide(width: 2.0),
+              borderSide: BorderSide(color: Styles.primaryColor, width: 2.0),
               insets: EdgeInsets.only(right: 30.0, left: 20.0)),
-          unselectedLabelColor: Colors.black45,
+          unselectedLabelColor: Colors.black38,
           labelStyle: GoogleFonts.nunito(fontSize: 20.0),
           tabs: topics.map((e) {
             return Tab(text: e);
@@ -260,15 +262,40 @@ class HeaderAppBar extends StatelessWidget {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Text(
-              'Classic Times',
-              style: GoogleFonts.dancingScript(
-                  fontSize: 28.0,
-                  letterSpacing: 3.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  FontAwesomeIcons.mapMarkerAlt,
+                  color: Styles.primaryColor,
+                  size: 18.0,
+                ),
+                const SizedBox(width: 4.0),
+                Padding(
+                  padding: const EdgeInsets.only(top: 6.0),
+                  child: Text(
+                    'Chennai,',
+                    style: GoogleFonts.spartan(
+                        fontSize: 16.0,
+                        color: Styles.primaryColor,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(width: 4.0),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    'India.',
+                    style: GoogleFonts.spartan(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           CustomShowCase(
@@ -316,69 +343,3 @@ class _NewsListState extends State<NewsList>
   bool get wantKeepAlive => true;
 }
 
-class NewsCard extends StatelessWidget {
-  final Articles articles;
-  const NewsCard({Key? key, required this.articles}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (() =>
-          Navigator.pushNamed(context, AppRouter.DETAIL, arguments: articles)),
-      child: Hero(
-        tag: articles.hashCode,
-        child: Card(
-          margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
-          elevation: 4.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 12.0),
-            child: IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: articles.urlToImage != null
-                                ? articles.urlToImage.toString()
-                                : 'https://i.pinimg.com/originals/64/a9/1a/64a91a7a4c519e20dab92de9cf1d4447.jpg'),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8.0),
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      children: [
-                        Text(
-                          articles.title,
-                          style: GoogleFonts.quicksand(
-                              fontSize: 16.0, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 5.0),
-                        Text(
-                          articles.description != null
-                              ? articles.description.toString()
-                              : 'No Description found for this news.',
-                          style: GoogleFonts.raleway(
-                              fontSize: 14.0, color: Colors.black),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}

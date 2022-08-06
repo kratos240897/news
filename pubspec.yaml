@@ -46,7 +46,7 @@ dependencies:
   url_launcher: ^6.1.0
   showcaseview: ^1.1.5
   get: ^4.6.1
-  sidebarx: ^0.2.2
+  retrofit: ^3.0.1+1
 
 dev_dependencies:
   flutter_test:

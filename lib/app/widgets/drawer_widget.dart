@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider_news/app/helpers/utils.dart';
 
 import '../data/drawer_items.dart';
 import '../models/drawer_item.dart';
@@ -18,44 +20,41 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Styles.primaryColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Column(
               children: DrawerItems.all
-                  .map((e) => Container(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        width: MediaQuery.of(context).size.width * 0.50,
-                        margin: const EdgeInsets.symmetric(vertical: 5.0),
-                        decoration: BoxDecoration(
-                            color: selectedItem == e
-                                ? Colors.amber.withOpacity(0.5)
-                                : Colors.transparent,
-                            borderRadius: selectedItem == e
-                                ? const BorderRadius.only(
-                                    topRight: Radius.circular(20.0),
-                                    bottomRight: Radius.circular(20.0))
-                                : BorderRadius.zero),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.all(5.0),
-                          onTap: () {
-                            widget.onItemSelected(e);
-                            setState(() {
-                              selectedItem = e;
-                            });
-                          },
-                          title: Text(
-                            e.title,
-                            style: GoogleFonts.openSans(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16.0,
-                                color: Colors.black),
-                          ),
-                          leading: Icon(
-                            e.icon,
-                            color: Colors.black87,
+                  .map((e) => InkWell(
+                        onTap: () {
+                          widget.onItemSelected(e);
+                          setState(() {
+                            selectedItem = e;
+                          });
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 20.0),
+                          child: Row(
+                            children: [
+                              FaIcon(e.icon,
+                                  size: 22.0,
+                                  color: selectedItem == e
+                                      ? Colors.white
+                                      : Colors.white38),
+                              const SizedBox(width: 15.0),
+                              Text(e.title,
+                                  style: GoogleFonts.spartan(
+                                      fontWeight: selectedItem == e
+                                          ? FontWeight.w600
+                                          : FontWeight.w400,
+                                      fontSize: 16.0,
+                                      color: selectedItem == e
+                                          ? Colors.white
+                                          : Colors.white38))
+                            ],
                           ),
                         ),
                       ))

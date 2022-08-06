@@ -36,9 +36,9 @@ class _HomeState extends State<Home> {
   }
 
   void openDrawer() => setState(() {
-        xOffset = 230.0;
-        yOffset = 150.0;
-        scaleFactor = 0.6;
+        xOffset = 200.0;
+        yOffset = 100.0;
+        scaleFactor = 0.8;
         isDrawerOpen = true;
       });
 
@@ -52,17 +52,14 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.white,
       body: Stack(children: [
-        SizedBox(
-          width: xOffset,
-          child: DrawerWidget(onItemSelected: (item) {
-            setState(() {
-              this.item = item;
-            });
-            closeDrawer();
-          }),
-        ),
+        DrawerWidget(onItemSelected: (item) {
+          setState(() {
+            this.item = item;
+          });
+          closeDrawer();
+        }),
         GestureDetector(
           onHorizontalDragStart: (details) {
             isDragging = true;
@@ -89,11 +86,9 @@ class _HomeState extends State<Home> {
                   absorbing: isDrawerOpen,
                   child: ClipRRect(
                     borderRadius:
-                        BorderRadius.circular(isDrawerOpen ? 20.0 : 0.0),
+                        BorderRadius.circular(isDrawerOpen ? 30.0 : 0.0),
                     child: Container(
-                        color: isDrawerOpen
-                            ? Colors.amber.withOpacity(0.5)
-                            : Colors.grey[200],
+                        color: isDrawerOpen ? Colors.white : Colors.grey[200],
                         child: getSelectedPage()),
                   ))),
         )

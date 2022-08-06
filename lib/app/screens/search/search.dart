@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_news/app/helpers/utils.dart';
 import 'package:provider_news/app/models/news_response.dart';
 import 'package:provider_news/app/routes/router.dart';
 import 'package:provider_news/app/screens/search/search_provider.dart';
 import 'package:provider_news/app/widgets/bordered_box_button.dart';
+
+import '../../widgets/news_list.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -102,7 +105,7 @@ class TrendingSearches extends StatelessWidget {
           return ElevatedButton.icon(
               icon: const Icon(
                 Icons.moving,
-                color: Colors.amber,
+                color: Styles.primaryColor,
               ),
               style: ElevatedButton.styleFrom(
                   elevation: 4.0,
@@ -114,7 +117,8 @@ class TrendingSearches extends StatelessWidget {
               },
               label: Text(
                 e,
-                style: GoogleFonts.openSans(fontWeight: FontWeight.w600),
+                style: GoogleFonts.openSans(
+                    fontWeight: FontWeight.w600, color: Styles.primaryColor),
               ));
         }).toList(),
       ),
@@ -155,6 +159,13 @@ class SearchAppBar extends StatelessWidget {
                       child: TextField(
                         controller: searchController,
                         autocorrect: false,
+                        onSubmitted: (_) {
+                          if (searchController.text.toString().isEmpty) {
+                            return;
+                          } else {
+                            provider.search(searchController.text.toString());
+                          }
+                        },
                         style: GoogleFonts.lato(
                             fontSize: 16.0, color: Colors.black),
                         decoration: InputDecoration(
@@ -165,9 +176,8 @@ class SearchAppBar extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      borderRadius: BorderRadius.circular(30.0),
-                      splashColor: Colors.amber,
-                      radius: 50.0,
+                      borderRadius: BorderRadius.circular(20.0),
+                      splashColor: Colors.green,
                       onTap: () {
                         if (searchController.text.toString().isEmpty) {
                           return;
@@ -175,7 +185,10 @@ class SearchAppBar extends StatelessWidget {
                           provider.search(searchController.text.toString());
                         }
                       },
-                      child: const FaIcon(FontAwesomeIcons.globeAsia),
+                      child: const FaIcon(
+                        FontAwesomeIcons.globeAsia,
+                        color: Styles.primaryColor,
+                      ),
                     )
                   ],
                 ),
@@ -188,85 +201,4 @@ class SearchAppBar extends StatelessWidget {
   }
 }
 
-class NewList extends StatelessWidget {
-  final List<Articles> articles;
-  const NewList({Key? key, required this.articles}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        padding: const EdgeInsets.all(5.0),
-        itemCount: articles.length,
-        itemBuilder: ((_, index) {
-          return NewsCard(articles: articles[index]);
-        }));
-  }
-}
-
-class NewsCard extends StatelessWidget {
-  final Articles articles;
-  const NewsCard({Key? key, required this.articles}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, AppRouter.DETAIL, arguments: articles);
-      },
-      child: Hero(
-        tag: articles.hashCode,
-        child: Card(
-          margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
-          elevation: 4.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 12.0),
-            child: IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: articles.urlToImage != null
-                                ? articles.urlToImage.toString()
-                                : 'https://i.pinimg.com/originals/64/a9/1a/64a91a7a4c519e20dab92de9cf1d4447.jpg'),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8.0),
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      children: [
-                        Text(
-                          articles.title,
-                          style: GoogleFonts.quicksand(
-                              fontSize: 16.0, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 5.0),
-                        Text(
-                          articles.description != null
-                              ? articles.description.toString()
-                              : 'No Description found for this news.',
-                          style: GoogleFonts.raleway(
-                              fontSize: 14.0, color: Colors.black),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}

@@ -13,7 +13,7 @@ class Explore extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
           child: Column(
             children: [
               CustomAppBar(

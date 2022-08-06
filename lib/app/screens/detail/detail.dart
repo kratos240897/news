@@ -64,10 +64,12 @@ class NewsBody extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0),
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(article.urlToImage !=
+                        image: CachedNetworkImageProvider(
+                          article.urlToImage !=
                                 null
                             ? article.urlToImage.toString()
-                            : 'https://i.pinimg.com/originals/64/a9/1a/64a91a7a4c519e20dab92de9cf1d4447.jpg')),
+                            : 'https://i.pinimg.com/originals/64/a9/1a/64a91a7a4c519e20dab92de9cf1d4447.jpg',
+                            )),
                   ),
                 ),
               ),

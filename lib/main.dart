@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:loggy/loggy.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_news/app/helpers/utils.dart';
 
 import 'app/repo/app_repo.dart';
 import 'app/routes/router.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primaryColor: Styles.primaryColor,
       ),
       onGenerateRoute: AppRouter().generateRoute,
     );

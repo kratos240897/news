@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider_news/app/helpers/utils.dart';
 
 class BorderedBoxButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -29,6 +30,7 @@ class BorderedBoxButton extends StatelessWidget {
                 child: Icon(
                   icon,
                   size: 28.0,
+                  color: Styles.primaryColor,
                 ))));
   }
 }

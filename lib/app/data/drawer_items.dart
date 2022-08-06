@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider_news/app/models/drawer_item.dart';
 
 class DrawerItems {
-  static const home =
-      DrawerItem(title: 'Home', icon: FontAwesomeIcons.home, isSelected: true);
+  static const home = DrawerItem(
+      title: 'Home', icon: FontAwesomeIcons.rocket, isSelected: true);
   static const explore = DrawerItem(title: 'Explore', icon: Icons.explore);
   static const favorites = DrawerItem(title: 'Favorites', icon: Icons.favorite);
   static const profile =
