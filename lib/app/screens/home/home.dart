@@ -5,8 +5,7 @@ import 'package:provider_news/app/widgets/drawer_widget.dart';
 import 'package:provider_news/app/widgets/favorites.dart';
 import 'package:provider_news/app/widgets/profile.dart';
 import 'package:provider_news/app/widgets/settings.dart';
-
-import '../../models/drawer_item.dart';
+import '../../data/models/drawer_item.dart';
 import '../../widgets/explore.dart';
 
 class Home extends StatefulWidget {
@@ -88,8 +87,7 @@ class _HomeState extends State<Home> {
                     borderRadius:
                         BorderRadius.circular(isDrawerOpen ? 30.0 : 0.0),
                     child: Container(
-                        color: isDrawerOpen ? Colors.white : Colors.grey[200],
-                        child: getSelectedPage()),
+                        color: Colors.white, child: getSelectedPage()),
                   ))),
         )
       ]),

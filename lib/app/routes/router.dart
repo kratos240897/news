@@ -1,15 +1,24 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:provider_news/app/models/news_response.dart';
 import 'package:provider_news/app/screens/web_view/webview.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../data/models/news_response.dart';
 import '../screens/detail/detail.dart';
 import '../screens/home/home.dart';
 import '../screens/search/search.dart';
 
-class AppRouter {
+class PageRouter {
+  PageRouter._();
+  static PageRouter? instance;
+  factory PageRouter() {
+    if (instance != null) {
+      return instance!;
+    }
+    return PageRouter._();
+  }
+
   static const HOME = '/';
   static const SEARCH = '/search';
   static const DETAIL = '/detail';

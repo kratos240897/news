@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loggy/loggy.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_news/app/helpers/utils.dart';
@@ -18,7 +19,6 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
   final AppRepository appRepository = AppRepo(apiService: ApiService());
-  appRepository.init();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
         create: ((context) => HomeProvider(appRepository: appRepository))),
@@ -33,13 +33,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: Styles.primaryColor,
-      ),
-      onGenerateRoute: AppRouter().generateRoute,
-    );
+    return ScreenUtilInit(
+        minTextAdapt: true,
+        builder: (context, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primaryColor: Styles.primaryColor,
+            ),
+            onGenerateRoute: PageRouter().generateRoute,
+          );
+        });
   }
 }

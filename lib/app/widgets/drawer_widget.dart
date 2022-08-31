@@ -1,10 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider_news/app/helpers/utils.dart';
 
 import '../data/drawer_items.dart';
-import '../models/drawer_item.dart';
+import '../data/models/drawer_item.dart';
 
 class DrawerWidget extends StatefulWidget {
   final ValueChanged<DrawerItem> onItemSelected;
@@ -20,7 +20,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Styles.primaryColor,
+      backgroundColor: CupertinoColors.activeBlue,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider_news/app/widgets/custom_app_bar.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -28,7 +29,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
             children: [
@@ -42,7 +43,11 @@ class _WebViewScreenState extends State<WebViewScreen> {
                     onTapRight: () {
                       _launchUrl();
                     },
-                    icon: FontAwesomeIcons.safari),
+                    onTapShare: () async {
+                      await Share.share(
+                          'Check out this article ' + widget.newsUrl);
+                    },
+                    icon: FontAwesomeIcons.chrome),
               ),
               const SizedBox(height: 12.0),
               Expanded(child: WebView(initialUrl: widget.newsUrl)),

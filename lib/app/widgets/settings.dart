@@ -20,6 +20,7 @@ class Settings extends StatelessWidget {
               CustomAppBar(
                   onTapLeft: openDrawer,
                   onTapRight: () {},
+                  onTapShare: () {},
                   icon: FontAwesomeIcons.heart),
               Expanded(
                   child: Center(

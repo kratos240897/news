@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider_news/app/models/drawer_item.dart';
+import 'models/drawer_item.dart';
 
 class DrawerItems {
   static const home = DrawerItem(

@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:provider_news/app/helpers/utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BorderedBoxButton extends StatelessWidget {
   final VoidCallback onTap;
   final IconData icon;
-  const BorderedBoxButton({
-    Key? key,
-    required this.onTap,
-    required this.icon,
-  }) : super(key: key);
+  final double? size;
+  final double? padding;
+  const BorderedBoxButton(
+      {Key? key,
+      required this.onTap,
+      required this.icon,
+      this.size,
+      this.padding})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        elevation: 4.0,
-        borderRadius: BorderRadius.circular(10.0),
-        child: InkWell(
-            borderRadius: BorderRadius.circular(10.0),
-            enableFeedback: true,
-            splashColor: Colors.amber,
-            onTap: onTap,
-            child: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Colors.grey.withAlpha(5), width: 2.0),
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.white),
-                child: Icon(
-                  icon,
-                  size: 28.0,
-                  color: Styles.primaryColor,
-                ))));
+    return GestureDetector(
+        onTap: onTap,
+        child: Container(
+            padding: EdgeInsets.all(padding ?? 12.0),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border:
+                    Border.all(color: Colors.grey.withAlpha(50), width: 1.5),
+                color: Colors.white),
+            child: FaIcon(
+              icon,
+              size: size ?? 20.h,
+              color: Colors.black,
+            )));
   }
 }

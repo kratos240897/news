@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider_news/app/models/news_response.dart';
 import 'package:provider_news/app/repo/app_repo.dart';
+
+import '../../data/models/news_response.dart';
 
 class SearchProvider extends ChangeNotifier {
   final List<Articles> articles = [];
