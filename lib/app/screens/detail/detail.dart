@@ -6,7 +6,6 @@ import 'package:provider_news/app/routes/router.dart';
 import 'package:provider_news/app/widgets/custom_app_bar.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../data/models/news_response.dart';
-import '../../widgets/custom_app_bar.dart';
 
 class Detail extends StatelessWidget {
   final Articles article;
@@ -18,8 +17,8 @@ class Detail extends StatelessWidget {
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(
-                left: 12.0, right: 12.0, bottom: 8.0, top: 8.0),
+            padding: EdgeInsets.only(
+                left: 12.sp, right: 12.sp, bottom: 8.sp, top: 8.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -32,10 +31,11 @@ class Detail extends StatelessWidget {
                           arguments: article.url.toString());
                     },
                     onTapShare: () async {
-                      await Share.share('Check out this article ' + article.url);
+                      await Share.share(
+                          'Check out this article ' + article.url);
                     },
                     icon: Icons.link),
-                const SizedBox(height: 15.0),
+                15.verticalSpace,
                 NewsBody(article: article)
               ],
             ),
@@ -53,18 +53,18 @@ class NewsBody extends StatelessWidget {
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+          padding: EdgeInsets.only(left: 5.sp, right: 5.sp),
           child: Column(
             children: [
               Hero(
                 tag: article.hashCode,
                 child: Material(
-                  borderRadius: BorderRadius.circular(20.0),
-                  elevation: 8.0,
+                  borderRadius: BorderRadius.circular(20.sp),
+                  elevation: 8.sp,
                   child: Container(
                     height: 0.40.sh,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(20.sp),
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: CachedNetworkImageProvider(

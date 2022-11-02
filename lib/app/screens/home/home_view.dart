@@ -54,10 +54,10 @@ class _HomeViewState extends State<HomeView>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Material(
-                    elevation: 8.0,
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20.0),
-                        bottomRight: Radius.circular(20.0)),
+                    elevation: 8.sp,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20.sp),
+                        bottomRight: Radius.circular(20.sp)),
                     child: Column(
                       children: [
                         HeaderAppBar(
@@ -99,8 +99,8 @@ class TopicsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-        margin: const EdgeInsets.only(top: 5, left: 12.0, right: 12.0),
-        height: 40.0,
+        margin: EdgeInsets.only(top: 5.sp, left: 12.sp, right: 12.sp),
+        height: 40.h,
         color: Colors.white,
         duration: const Duration(milliseconds: 400),
         curve: Curves.bounceInOut,
@@ -110,8 +110,8 @@ class TopicsWidget extends StatelessWidget {
             controller: topicsController,
             isRadio: true,
             options: GroupButtonOptions(
-                textPadding: const EdgeInsets.all(4.0),
-                spacing: 5.0,
+                textPadding: EdgeInsets.all(4.sp),
+                spacing: 5.sp,
                 groupingType: GroupingType.row,
                 direction: Axis.horizontal,
                 selectedColor: CupertinoColors.activeBlue,
@@ -126,7 +126,7 @@ class TopicsWidget extends StatelessWidget {
                     fontSize: 14.sp,
                     fontFamily: GoogleFonts.beVietnamPro().fontFamily),
                 unselectedColor: Colors.grey[200],
-                borderRadius: BorderRadius.circular(15.0)),
+                borderRadius: BorderRadius.circular(10.sp)),
             onSelected: (_, index, __) async {
               provider.setSelectedTopic(index);
             },
@@ -150,7 +150,7 @@ class HeaderAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 5.sp),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,7 +183,7 @@ class HeaderAppBar extends StatelessWidget {
                           'https://i.pinimg.com/474x/1d/a1/5f/1da15faba08158465c7bb9dbe86b7a82.jpg'),
                     ),
                   ),
-                  8.0.horizontalSpace,
+                  8.horizontalSpace,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -219,19 +219,19 @@ class HeaderAppBar extends StatelessWidget {
               Navigator.pushNamed(context, PageRouter.SEARCH);
             },
             child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                margin: EdgeInsets.symmetric(horizontal: 5.sp),
+                padding: EdgeInsets.symmetric(horizontal: 10.sp),
                 height: 40.h,
                 decoration: BoxDecoration(
                     color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(15.0)),
+                    borderRadius: BorderRadius.circular(12.sp)),
                 child: Row(
                   children: [
                     Icon(
                       Icons.search,
                       size: 20.h,
                     ),
-                    const SizedBox(width: 8.0),
+                    8.horizontalSpace,
                     Text('Search for articles...',
                         style: GoogleFonts.poppins(
                             color: Colors.grey, fontSize: 14.sp))

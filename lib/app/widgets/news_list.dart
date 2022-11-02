@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +17,7 @@ class NewsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         shrinkWrap: true,
-        padding: const EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(5.sp),
         itemCount: articles.length,
         itemBuilder: ((_, index) {
           return NewsCard(articles: articles[index]);
@@ -23,8 +26,15 @@ class NewsList extends StatelessWidget {
 }
 
 class NewsCard extends StatelessWidget {
+  final List<String> newsTypes = [
+    '${Emojis.fire} Hot',
+    '${Emojis.lightBulb} Insightful',
+    '${Emojis.cloudWithLightning} Latest',
+    '${Emojis.axe} Breaking',
+    '${Emojis.globeShowingEuropeAfrica} Economy'
+  ];
   final Articles articles;
-  const NewsCard({Key? key, required this.articles}) : super(key: key);
+  NewsCard({Key? key, required this.articles}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +44,10 @@ class NewsCard extends StatelessWidget {
       child: Hero(
         tag: articles.hashCode,
         child: Card(
-          margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
-          elevation: 12.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          margin: EdgeInsets.symmetric(vertical: 4.sp, horizontal: 5.sp),
+          elevation: 12.sp,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.sp)),
           child: SizedBox(
             height: 0.40.sh,
             child: Column(
@@ -45,9 +55,9 @@ class NewsCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.sp),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(10.sp),
                     child: CachedNetworkImage(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.25,
@@ -65,7 +75,7 @@ class NewsCard extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 5.0),
+                      EdgeInsets.only(left: 8.sp, right: 8.sp, bottom: 5.sp),
                   child: Text(
                     articles.title,
                     maxLines: 2,
@@ -74,11 +84,11 @@ class NewsCard extends StatelessWidget {
                         fontSize: 14.sp, fontWeight: FontWeight.w600),
                   ),
                 ),
-                const SizedBox(height: 5.0),
+                SizedBox(height: 5.sp),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 8.0, right: 8.0, bottom: 8.0),
+                    padding:
+                        EdgeInsets.only(left: 8.sp, right: 8.sp, bottom: 8.sp),
                     child: Row(
                       children: [
                         Container(
@@ -93,34 +103,34 @@ class NewsCard extends StatelessWidget {
                                 'https://i.pinimg.com/474x/1d/a1/5f/1da15faba08158465c7bb9dbe86b7a82.jpg'),
                           ),
                         ),
-                        const SizedBox(width: 8.0),
+                        SizedBox(width: 8.sp),
                         Flexible(
                           fit: FlexFit.loose,
                           child: Text(
                             articles.author ?? 'unknown',
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
-                                color: Colors.grey,
+                                color: Colors.black87,
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                        const SizedBox(width: 5.0),
+                        5.horizontalSpace,
                         Row(
                           children: [
                             Text(
                               '•',
                               style: GoogleFonts.poppins(
-                                  color: Colors.grey,
-                                  fontSize: 22.sp,
+                                  color: Colors.black87,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w600),
                             ),
-                            const SizedBox(width: 5.0),
+                            5.horizontalSpace,
                             Text(
-                              '3 hours ago',
+                              newsTypes[Random().nextInt(newsTypes.length)],
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.poppins(
-                                  color: Colors.grey,
+                                  color: Colors.black87,
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w600),
                             ),

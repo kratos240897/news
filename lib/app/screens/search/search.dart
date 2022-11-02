@@ -45,15 +45,15 @@ class _SearchState extends State<Search> {
             return Column(
               children: [
                 Material(
-                  elevation: 8.0,
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(20.0),
-                      bottomRight: Radius.circular(20.0)),
+                  elevation: 8.sp,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20.sp),
+                      bottomRight: Radius.circular(20.sp)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 12.0),
+                        padding: EdgeInsets.only(left: 12.sp),
                         child: BorderedBoxButton(
                             onTap: () {
                               Navigator.of(context).pop();
@@ -63,11 +63,11 @@ class _SearchState extends State<Search> {
                       SearchAppBar(
                           provider: provider,
                           searchController: searchController),
-                      const SizedBox(height: 8.0),
+                      SizedBox(height: 8.sp),
                       TrendingSearches(
                           provider: provider,
                           searchController: searchController),
-                      const SizedBox(height: 8.0),
+                      SizedBox(height: 8.sp),
                     ],
                   ),
                 ),
@@ -116,7 +116,7 @@ class TrendingSearches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15.0, right: 8.0),
+      padding: EdgeInsets.only(left: 15.sp, right: 8.sp),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -126,8 +126,8 @@ class TrendingSearches extends StatelessWidget {
           ),
           4.verticalSpace,
           Wrap(
-            spacing: 5.0,
-            runSpacing: 2.0,
+            spacing: 5.sp,
+            runSpacing: 2.sp,
             verticalDirection: VerticalDirection.down,
             alignment: WrapAlignment.start,
             children: trendingTopics.map((e) {
@@ -138,8 +138,8 @@ class TrendingSearches extends StatelessWidget {
                     size: 12.h,
                   ),
                   style: ElevatedButton.styleFrom(
-                      elevation: 4.0,
-                      primary: CupertinoColors.activeBlue,
+                      elevation: 4.sp,
+                      backgroundColor: CupertinoColors.activeBlue,
                       shape: const StadiumBorder()),
                   onPressed: () {
                     searchController.text = e;
@@ -173,38 +173,36 @@ class SearchAppBar extends StatefulWidget {
 
 class _SearchAppBarState extends State<SearchAppBar> {
   final _searchFocusNode = FocusNode();
-  bool cancelVisible = false;
 
   @override
   void initState() {
-    _searchFocusNode.addListener(() {
-      bool hasFocus = _searchFocusNode.hasFocus;
-      if (hasFocus) {
-        setState(() {
-          cancelVisible = true;
-        });
-      } else {
-        setState(() {
-          cancelVisible = false;
-        });
-      }
-    });
+    _searchFocusNode.addListener(_searchFocusListener);
     super.initState();
+  }
+
+  void _searchFocusListener() {
+    bool hasFocus = _searchFocusNode.hasFocus;
+    if (hasFocus) {
+      widget.provider.cancelVisible = true;
+    } else {
+      widget.provider.cancelVisible = false;
+    }
+    widget.provider.updateUI();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+      padding: EdgeInsets.only(left: 8.sp, right: 8.sp),
       child: Row(
         children: [
           Expanded(
             child: Card(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0)),
-              elevation: 4.0,
+                  borderRadius: BorderRadius.circular(8.sp)),
+              elevation: 4.sp,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                padding: EdgeInsets.symmetric(horizontal: 12.sp),
                 child: TextField(
                   controller: widget.searchController,
                   focusNode: _searchFocusNode,
@@ -232,7 +230,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
               duration: const Duration(milliseconds: 300),
               switchInCurve: Curves.easeInCubic,
               switchOutCurve: Curves.easeInOutCubic,
-              child: cancelVisible
+              child: widget.provider.cancelVisible
                   ? Padding(
                       padding: EdgeInsets.only(right: 5.w),
                       child: GestureDetector(

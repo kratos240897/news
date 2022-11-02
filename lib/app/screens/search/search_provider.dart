@@ -7,11 +7,16 @@ class SearchProvider extends ChangeNotifier {
   final List<Articles> articles = [];
   var isLoading = false;
   final AppRepository appRepository;
+  bool cancelVisible = false;
 
   SearchProvider({required this.appRepository});
 
   showLoading(bool isLoading) {
     this.isLoading = isLoading;
+    notifyListeners();
+  }
+
+  updateUI() {
     notifyListeners();
   }
 

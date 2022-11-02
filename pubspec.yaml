@@ -51,6 +51,7 @@ dependencies:
   group_button: ^5.0.1
   flutter_screenutil: ^5.5.3+2
   share_plus: ^4.0.10+1
+  emojis: ^0.9.9
 
 dev_dependencies:
   flutter_test:
