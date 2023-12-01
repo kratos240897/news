@@ -23,12 +23,12 @@ class CustomShowCase extends StatelessWidget {
       key: globalKey,
       title: title,
       description: description,
-      shapeBorder: isCircleBorder
+      targetShapeBorder: isCircleBorder
           ? const CircleBorder()
           : RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      contentPadding: const EdgeInsets.all(15.0),
+      targetPadding: const EdgeInsets.all(15.0),
       titleTextStyle:
-          GoogleFonts.spartan(fontWeight: FontWeight.w600, fontSize: 20.0),
+          GoogleFonts.leagueSpartan(fontWeight: FontWeight.w600, fontSize: 20.0),
       descTextStyle: GoogleFonts.quicksand(
           letterSpacing: 1.2,
           fontSize: 18.0,

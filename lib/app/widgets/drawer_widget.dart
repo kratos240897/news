@@ -46,7 +46,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                                       : Colors.white38),
                               const SizedBox(width: 15.0),
                               Text(e.title,
-                                  style: GoogleFonts.spartan(
+                                  style: GoogleFonts.leagueSpartan(
                                       fontWeight: selectedItem == e
                                           ? FontWeight.w600
                                           : FontWeight.w400,

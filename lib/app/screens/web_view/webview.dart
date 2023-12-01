@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider_news/app/widgets/custom_app_bar.dart';
@@ -16,10 +14,30 @@ class WebViewScreen extends StatefulWidget {
 }
 
 class _WebViewScreenState extends State<WebViewScreen> {
+  late WebViewController controller;
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.newsUrl));
   }
 
   _launchUrl() async => await canLaunchUrl(Uri.parse(widget.newsUrl))
@@ -50,7 +68,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                     icon: FontAwesomeIcons.chrome),
               ),
               const SizedBox(height: 12.0),
-              Expanded(child: WebView(initialUrl: widget.newsUrl)),
+              Expanded(child: WebViewWidget(controller: controller)),
             ],
           ),
         ));

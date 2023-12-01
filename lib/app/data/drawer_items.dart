@@ -8,7 +8,7 @@ class DrawerItems {
   static const explore = DrawerItem(title: 'Explore', icon: Icons.explore);
   static const favorites = DrawerItem(title: 'Favorites', icon: Icons.favorite);
   static const profile =
-      DrawerItem(title: 'Profile', icon: FontAwesomeIcons.userAlt);
+      DrawerItem(title: 'Profile', icon: FontAwesomeIcons.locationDot);
   static const settings = DrawerItem(title: 'Settings', icon: Icons.settings);
 
   static final List<DrawerItem> all = [
